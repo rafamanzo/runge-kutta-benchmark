@@ -1,0 +1,25 @@
+Brasil - São Paulo - São Paulo
+Instituto de Metemática e Estatística da Universidade de São Paulo (IME - USP)
+C++, CUDA and OpenCL implementations of Runge-Kutta methods (orders 2 and 4) applied to vector fields
+
+###########
+# LICENSE #
+###########
+
+LGPL v3.0
+Please see http://www.gnu.org/licenses/lgpl-3.0.txt
+
+##############
+# DEVELOPERS #
+##############
+
+Orientation: Assistant Professor of Computer Science MARCEL P. JACKOWSKI
+
+Development: Rafael Reggiani Manzo (CUDA and C++)
+             Giancarlo Rigo (OpenCL and C++)
+
+###############
+# Description #
+###############
+
+Benchmark for the implementations of the Runge-Kutta methods of order 2 and 4 (found at ...), comparing CPU and GPU for this purpose.
