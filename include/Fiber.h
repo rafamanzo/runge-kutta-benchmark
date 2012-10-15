@@ -7,7 +7,7 @@ namespace RungeKuttaBenchmark{
     public:
       Fiber(unsigned pointsCount);
       Fiber();
-      //~Fiber();
+      ~Fiber();
       void setPoint(unsigned order, vector point);
       vector getPoint(unsigned order);
       unsigned pointsCount();

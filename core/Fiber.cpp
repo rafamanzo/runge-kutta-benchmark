@@ -15,7 +15,6 @@ Fiber::Fiber(unsigned pointsCount){
   _points = (vector *) malloc(pointsCount*sizeof(vector));
 
   _allocation_clock_count = (clock() - start);
-  //printf("Allocation clocks: %ld\n", _allocation_clock_count);
 }
 
 Fiber::Fiber(){
@@ -27,6 +26,14 @@ Fiber::Fiber(){
   _points = NULL;
 
   _allocation_clock_count = (clock() - start);
+}
+
+Fiber::~Fiber(){
+  if(_points != NULL){
+    _pointsCount = 0;
+    free(_points);
+    _points = NULL;
+  }
 }
 
 void Fiber::setPoint(unsigned order, vector point){
