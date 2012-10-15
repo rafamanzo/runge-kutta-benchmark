@@ -9,3 +9,6 @@ CMakeFiles
 CPUresults.txt
 runge-kutta-benchmark.sublime-project
 runge-kutta-benchmark.sublime-workspace
+RungeKuttaBenchmark
+Makefile
+cmake_install.cmake
