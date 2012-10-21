@@ -1,7 +1,6 @@
 *~
 *.o
 rk
-fixtures
 runge-kutta.sublime-project
 runge-kutta.sublime-workspace
 CMakeCache.txt
