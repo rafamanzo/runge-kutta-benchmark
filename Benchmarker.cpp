@@ -108,7 +108,6 @@ void Benchmarker::cppRK4Benchmark(unsigned runs_count){
       delete cs;
 
       for(fiber_index = 0; fiber_index < initial_points; fiber_index++){
-        if(fibers[fiber_index]->pointsCount() > 1) printf("%d\n", fibers[fiber_index]->pointsCount());
         delete fibers[fiber_index];
       }
 
