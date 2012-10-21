@@ -13,7 +13,5 @@ namespace RungeKuttaBenchmark{
     protected:
       double _proc_time_in_sec;
       double _memo_time_in_sec;
-      clock_t _proc_start;
-      clock_t _memo_start;
   };
 }

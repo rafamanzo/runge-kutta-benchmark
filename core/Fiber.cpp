@@ -13,7 +13,6 @@ Fiber::Fiber(unsigned pointsCount){
 
   _pointsCount = pointsCount;
   _points = (vector *) malloc(pointsCount*sizeof(vector));
-
   _allocation_clock_count = (clock() - start);
 }
 
