@@ -8,7 +8,8 @@ find_package (CUDA)
 include_directories(include)
 include(FindCUDA)
 
-set( my_cuda_flags "-arch=sm_20" CACHE STRING "Set the cuda flags like -arch=sm_20")
+#-Xptxas=-v for profilling
+set( my_cuda_flags "-arch=compute_21 -code=sm_21" CACHE STRING "Set the cuda flags like -arch=sm_20")
 list(APPEND CUDA_NVCC_FLAGS ${my_cuda_flags})
 
 cuda_add_executable(RungeKuttaBenchmark Main core/DataSet fixtures/Fixture fixtures/cpp/CStraightFixture timers/Timer timers/CTimer core/Fiber Benchmarker core/cpp/RKCKernel core/cuda/RKCUDAKernel.cu timers/CUDATimer.cu fixtures/cuda/CUDAStraightFixture.cu)
