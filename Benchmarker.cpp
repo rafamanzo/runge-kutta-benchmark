@@ -155,7 +155,7 @@ void Benchmarker::cudaRK2Benchmark(unsigned runs_count){
   memo_time = (double *) malloc(runs_count*sizeof(double));
   proc_time = (double *) malloc(runs_count*sizeof(double));
 
-  for(initial_points = 16; initial_points <= 256; initial_points *= 2){
+  for(initial_points = 16; initial_points <= 1024; initial_points *= 2){
     for(run = 0; run < runs_count; run++)
       memo_time[run] = proc_time[run] = 0.0;
 
@@ -177,8 +177,14 @@ void Benchmarker::cudaRK2Benchmark(unsigned runs_count){
       c_timer.stopRecordMemoTime();
 
       cuda_timer.startRecordMemoTime();
-        cudaMemcpy(points_count_aux, cds->getPointsCount(), initial_points*sizeof(int), cudaMemcpyDeviceToHost);
-        cudaMemcpy(points_aux, cds->getPoints(), initial_points*cds->getMaxPoints()*sizeof(vector), cudaMemcpyDeviceToHost);
+        if(cudaMemcpy(points_count_aux, cds->getPointsCount(), initial_points*sizeof(int), cudaMemcpyDeviceToHost) != cudaSuccess){
+          printf("\nCould not retrieve %d points count that should be at %p. Message: %s\n",initial_points, cds->getPointsCount(), cudaGetErrorString(cudaGetLastError()));
+          exit(-1);
+        }
+        if(cudaMemcpy(points_aux, cds->getPoints(), initial_points*cds->getMaxPoints()*sizeof(vector), cudaMemcpyDeviceToHost) != cudaSuccess){
+          printf("\nCould not retrieve %d lists of points that should be at %p\n",initial_points, cds->getPoints());
+          exit(-1);
+        }
       cuda_timer.stopRecordMemoTime();
 
       c_timer.startRecordMemoTime();
@@ -248,7 +254,7 @@ void Benchmarker::cudaRK4Benchmark(unsigned runs_count){
   memo_time = (double *) malloc(runs_count*sizeof(double));
   proc_time = (double *) malloc(runs_count*sizeof(double));
 
-  for(initial_points = 16; initial_points <= 256; initial_points *= 2){
+  for(initial_points = 16; initial_points <= 1024; initial_points *= 2){
     for(run = 0; run < runs_count; run++)
       memo_time[run] = proc_time[run] = 0.0;
 
@@ -270,8 +276,14 @@ void Benchmarker::cudaRK4Benchmark(unsigned runs_count){
       c_timer.stopRecordMemoTime();
 
       cuda_timer.startRecordMemoTime();
-        cudaMemcpy(points_count_aux, cds->getPointsCount(), initial_points*sizeof(int), cudaMemcpyDeviceToHost);
-        cudaMemcpy(points_aux, cds->getPoints(), initial_points*cds->getMaxPoints()*sizeof(vector), cudaMemcpyDeviceToHost);
+        if(cudaMemcpy(points_count_aux, cds->getPointsCount(), initial_points*sizeof(int), cudaMemcpyDeviceToHost) != cudaSuccess){
+          printf("\nCould not retrieve %d points count that should be at %p. Message: %s\n",initial_points, cds->getPointsCount(), cudaGetErrorString(cudaGetLastError()));
+          exit(-1);
+        }
+        if(cudaMemcpy(points_aux, cds->getPoints(), initial_points*cds->getMaxPoints()*sizeof(vector), cudaMemcpyDeviceToHost) != cudaSuccess){
+          printf("\nCould not retrieve %d lists of points that should be at %p\n",initial_points, cds->getPoints());
+          exit(-1);
+        }
       cuda_timer.stopRecordMemoTime();
 
       c_timer.startRecordMemoTime();

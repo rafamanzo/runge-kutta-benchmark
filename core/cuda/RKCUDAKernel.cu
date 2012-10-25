@@ -143,7 +143,6 @@ __device__ vector cuda_trilinear_interpolation(vector v0, int n_x, int n_y, int 
 /***********/
 
 __global__ void rk2_kernel(vector *v0, int count_v0, double h, int n_x, int n_y, int n_z, vector_field field, vector *points, int *n_points, int max_points){
-  /*TODO: moving the field to the shared memory should increase performance*/
   vector k1, k2, initial, direction;
   int i, n_points_aux;
 
@@ -171,7 +170,6 @@ __global__ void rk2_kernel(vector *v0, int count_v0, double h, int n_x, int n_y,
 }
 
 __global__ void rk4_kernel(vector *v0, int count_v0, double h, int n_x, int n_y, int n_z, vector_field field, vector *points, int *n_points, int max_points){
-  /*TODO: moving the field to the shared memory should increase performance*/
   vector k1, k2, k3, k4, initial, direction;
   int i, n_points_aux;
 
@@ -203,14 +201,34 @@ __global__ void rk4_kernel(vector *v0, int count_v0, double h, int n_x, int n_y,
 /* Callers */
 /***********/
 
+int blockThreadLimit(int count_v0){
+  cudaDeviceProp deviceProp;
+  cudaGetDeviceProperties(&deviceProp, 0);
+
+  return ceil(((double) count_v0)/((double) deviceProp.maxThreadsPerBlock));
+}
+
+int blockRegisterLimit(int count_v0){
+  cudaDeviceProp deviceProp;
+  cudaGetDeviceProperties(&deviceProp, 0);
+
+  return ceil(((double) count_v0*REGISTERS_PER_THREAD) / ((double) deviceProp.regsPerBlock) );
+}
+
 int blocksCount(int count_v0){
   cudaDeviceProp deviceProp;
   cudaGetDeviceProperties(&deviceProp, 0);
 
-  if(deviceProp.multiProcessorCount > (count_v0/deviceProp.maxThreadsPerBlock))
+  if(deviceProp.multiProcessorCount > blockThreadLimit(count_v0) &&
+     deviceProp.multiProcessorCount > blockRegisterLimit(count_v0)
+    )
     return deviceProp.multiProcessorCount;
+  else if(blockRegisterLimit(count_v0) > deviceProp.multiProcessorCount &&
+          blockRegisterLimit(count_v0) > blockThreadLimit(count_v0)
+         )
+    return blockRegisterLimit(count_v0);
   else
-    return (count_v0/deviceProp.maxThreadsPerBlock);
+    return blockThreadLimit(count_v0);
 }
 
 int threadsPerBlock(int count_v0){
@@ -219,10 +237,16 @@ int threadsPerBlock(int count_v0){
 
 void rk2_cuda_caller(vector *v0, int count_v0, double h, int n_x, int n_y, int n_z, vector_field field, vector *points, int *points_count, int max_points){
   rk2_kernel<<<blocksCount(count_v0), threadsPerBlock(count_v0)>>>(v0, count_v0, h, n_x, n_y, n_z, field, points, points_count, max_points);
-  cudaDeviceSynchronize();
+  if(cudaDeviceSynchronize() != cudaSuccess){
+    printf("There was an error on RK2 execution: %s\n", cudaGetErrorString(cudaGetLastError()));
+    exit(-1);
+  }
 }
 
 void rk4_cuda_caller(vector *v0, int count_v0, double h, int n_x, int n_y, int n_z, vector_field field, vector *points, int *points_count, int max_points){
   rk4_kernel<<<blocksCount(count_v0), threadsPerBlock(count_v0)>>>(v0, count_v0, h, n_x, n_y, n_z, field, points, points_count, max_points);
-  cudaDeviceSynchronize();
+  if(cudaDeviceSynchronize() != cudaSuccess){
+    printf("There was an error on RK4 execution: %s\n", cudaGetErrorString(cudaGetLastError()));
+    exit(-1);
+  }
 }
