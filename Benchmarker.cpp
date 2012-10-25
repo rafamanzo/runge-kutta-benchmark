@@ -261,7 +261,7 @@ void Benchmarker::cudaRK4Benchmark(unsigned runs_count){
       cuda_timer.stopRecordMemoTime();
 
       cuda_timer.startRecordProcTime();
-        rk2_cuda_caller(cds->getInitialPoints(), initial_points, cds->getStepSize(), cds->getDataSet().n_x(), cds->getDataSet().n_y(), cds->getDataSet().n_z(), cds->getField(), cds->getPoints(), cds->getPointsCount(), cds->getMaxPoints());
+        rk4_cuda_caller(cds->getInitialPoints(), initial_points, cds->getStepSize(), cds->getDataSet().n_x(), cds->getDataSet().n_y(), cds->getDataSet().n_z(), cds->getField(), cds->getPoints(), cds->getPointsCount(), cds->getMaxPoints());
       cuda_timer.stopRecordProcTime();
 
       c_timer.startRecordMemoTime();
@@ -332,6 +332,6 @@ void Benchmarker::runCPUTests(unsigned runs_count){
 }
 
 void Benchmarker::runGPUTests(unsigned runs_count){
-  cudaRK4Benchmark(runs_count);
   cudaRK2Benchmark(runs_count);
+  cudaRK4Benchmark(runs_count);
 }

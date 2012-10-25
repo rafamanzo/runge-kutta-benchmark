@@ -203,12 +203,26 @@ __global__ void rk4_kernel(vector *v0, int count_v0, double h, int n_x, int n_y,
 /* Callers */
 /***********/
 
+int blocksCount(int count_v0){
+  cudaDeviceProp deviceProp;
+  cudaGetDeviceProperties(&deviceProp, 0);
+
+  if(deviceProp.multiProcessorCount > (count_v0/deviceProp.maxThreadsPerBlock))
+    return deviceProp.multiProcessorCount;
+  else
+    return (count_v0/deviceProp.maxThreadsPerBlock);
+}
+
+int threadsPerBlock(int count_v0){
+  return floor( ((double) count_v0)/((double) blocksCount(count_v0)) );
+}
+
 void rk2_cuda_caller(vector *v0, int count_v0, double h, int n_x, int n_y, int n_z, vector_field field, vector *points, int *points_count, int max_points){
-  rk2_kernel<<<1,count_v0>>>(v0, count_v0, h, n_x, n_y, n_z, field, points, points_count, max_points);
+  rk2_kernel<<<blocksCount(count_v0), threadsPerBlock(count_v0)>>>(v0, count_v0, h, n_x, n_y, n_z, field, points, points_count, max_points);
   cudaDeviceSynchronize();
 }
 
 void rk4_cuda_caller(vector *v0, int count_v0, double h, int n_x, int n_y, int n_z, vector_field field, vector *points, int *points_count, int max_points){
-  rk4_kernel<<<1,count_v0>>>(v0, count_v0, h, n_x, n_y, n_z, field, points, points_count, max_points);
+  rk4_kernel<<<blocksCount(count_v0), threadsPerBlock(count_v0)>>>(v0, count_v0, h, n_x, n_y, n_z, field, points, points_count, max_points);
   cudaDeviceSynchronize();
 }
