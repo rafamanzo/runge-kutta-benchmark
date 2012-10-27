@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <pthread.h>
 
+#include <rkb_types.h>
 #include <DataSet.h>
 #include <Fiber.h>
 #include <RKCKernel.h>

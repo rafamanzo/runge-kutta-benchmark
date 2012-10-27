@@ -1,3 +1,4 @@
+#include <rkb_types.h>
 #include <DataSet.h>
 #include <Fixture.h>
 

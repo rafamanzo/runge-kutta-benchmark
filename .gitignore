@@ -11,3 +11,5 @@ runge-kutta-benchmark.sublime-workspace
 RungeKuttaBenchmark
 Makefile
 cmake_install.cmake
+*.dat
+*.p

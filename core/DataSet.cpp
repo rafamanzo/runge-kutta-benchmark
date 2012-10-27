@@ -1,5 +1,7 @@
 #include <cstdlib>
 #include <cmath>
+
+#include <rkb_types.h>
 #include <DataSet.h>
 
 using namespace RungeKuttaBenchmark;

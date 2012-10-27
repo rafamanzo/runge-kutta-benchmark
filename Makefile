@@ -108,30 +108,6 @@ RungeKuttaBenchmark/fast:
 	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/build
 .PHONY : RungeKuttaBenchmark/fast
 
-Benchmarker.o: Benchmarker.cpp.o
-.PHONY : Benchmarker.o
-
-# target to build an object file
-Benchmarker.cpp.o:
-	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/Benchmarker.cpp.o
-.PHONY : Benchmarker.cpp.o
-
-Benchmarker.i: Benchmarker.cpp.i
-.PHONY : Benchmarker.i
-
-# target to preprocess a source file
-Benchmarker.cpp.i:
-	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/Benchmarker.cpp.i
-.PHONY : Benchmarker.cpp.i
-
-Benchmarker.s: Benchmarker.cpp.s
-.PHONY : Benchmarker.s
-
-# target to generate assembly for a file
-Benchmarker.cpp.s:
-	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/Benchmarker.cpp.s
-.PHONY : Benchmarker.cpp.s
-
 Main.o: Main.cpp.o
 .PHONY : Main.o
 
@@ -155,6 +131,126 @@ Main.s: Main.cpp.s
 Main.cpp.s:
 	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/Main.cpp.s
 .PHONY : Main.cpp.s
+
+benchmarkers/Benchmark.o: benchmarkers/Benchmark.cpp.o
+.PHONY : benchmarkers/Benchmark.o
+
+# target to build an object file
+benchmarkers/Benchmark.cpp.o:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/Benchmark.cpp.o
+.PHONY : benchmarkers/Benchmark.cpp.o
+
+benchmarkers/Benchmark.i: benchmarkers/Benchmark.cpp.i
+.PHONY : benchmarkers/Benchmark.i
+
+# target to preprocess a source file
+benchmarkers/Benchmark.cpp.i:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/Benchmark.cpp.i
+.PHONY : benchmarkers/Benchmark.cpp.i
+
+benchmarkers/Benchmark.s: benchmarkers/Benchmark.cpp.s
+.PHONY : benchmarkers/Benchmark.s
+
+# target to generate assembly for a file
+benchmarkers/Benchmark.cpp.s:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/Benchmark.cpp.s
+.PHONY : benchmarkers/Benchmark.cpp.s
+
+benchmarkers/Benchmarker.o: benchmarkers/Benchmarker.cpp.o
+.PHONY : benchmarkers/Benchmarker.o
+
+# target to build an object file
+benchmarkers/Benchmarker.cpp.o:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/Benchmarker.cpp.o
+.PHONY : benchmarkers/Benchmarker.cpp.o
+
+benchmarkers/Benchmarker.i: benchmarkers/Benchmarker.cpp.i
+.PHONY : benchmarkers/Benchmarker.i
+
+# target to preprocess a source file
+benchmarkers/Benchmarker.cpp.i:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/Benchmarker.cpp.i
+.PHONY : benchmarkers/Benchmarker.cpp.i
+
+benchmarkers/Benchmarker.s: benchmarkers/Benchmarker.cpp.s
+.PHONY : benchmarkers/Benchmarker.s
+
+# target to generate assembly for a file
+benchmarkers/Benchmarker.cpp.s:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/Benchmarker.cpp.s
+.PHONY : benchmarkers/Benchmarker.cpp.s
+
+benchmarkers/CBenchmark.o: benchmarkers/CBenchmark.cpp.o
+.PHONY : benchmarkers/CBenchmark.o
+
+# target to build an object file
+benchmarkers/CBenchmark.cpp.o:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/CBenchmark.cpp.o
+.PHONY : benchmarkers/CBenchmark.cpp.o
+
+benchmarkers/CBenchmark.i: benchmarkers/CBenchmark.cpp.i
+.PHONY : benchmarkers/CBenchmark.i
+
+# target to preprocess a source file
+benchmarkers/CBenchmark.cpp.i:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/CBenchmark.cpp.i
+.PHONY : benchmarkers/CBenchmark.cpp.i
+
+benchmarkers/CBenchmark.s: benchmarkers/CBenchmark.cpp.s
+.PHONY : benchmarkers/CBenchmark.s
+
+# target to generate assembly for a file
+benchmarkers/CBenchmark.cpp.s:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/CBenchmark.cpp.s
+.PHONY : benchmarkers/CBenchmark.cpp.s
+
+benchmarkers/CUDABenchmark.o: benchmarkers/CUDABenchmark.cpp.o
+.PHONY : benchmarkers/CUDABenchmark.o
+
+# target to build an object file
+benchmarkers/CUDABenchmark.cpp.o:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/CUDABenchmark.cpp.o
+.PHONY : benchmarkers/CUDABenchmark.cpp.o
+
+benchmarkers/CUDABenchmark.i: benchmarkers/CUDABenchmark.cpp.i
+.PHONY : benchmarkers/CUDABenchmark.i
+
+# target to preprocess a source file
+benchmarkers/CUDABenchmark.cpp.i:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/CUDABenchmark.cpp.i
+.PHONY : benchmarkers/CUDABenchmark.cpp.i
+
+benchmarkers/CUDABenchmark.s: benchmarkers/CUDABenchmark.cpp.s
+.PHONY : benchmarkers/CUDABenchmark.s
+
+# target to generate assembly for a file
+benchmarkers/CUDABenchmark.cpp.s:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/CUDABenchmark.cpp.s
+.PHONY : benchmarkers/CUDABenchmark.cpp.s
+
+benchmarkers/Statistics.o: benchmarkers/Statistics.cpp.o
+.PHONY : benchmarkers/Statistics.o
+
+# target to build an object file
+benchmarkers/Statistics.cpp.o:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/Statistics.cpp.o
+.PHONY : benchmarkers/Statistics.cpp.o
+
+benchmarkers/Statistics.i: benchmarkers/Statistics.cpp.i
+.PHONY : benchmarkers/Statistics.i
+
+# target to preprocess a source file
+benchmarkers/Statistics.cpp.i:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/Statistics.cpp.i
+.PHONY : benchmarkers/Statistics.cpp.i
+
+benchmarkers/Statistics.s: benchmarkers/Statistics.cpp.s
+.PHONY : benchmarkers/Statistics.s
+
+# target to generate assembly for a file
+benchmarkers/Statistics.cpp.s:
+	$(MAKE) -f CMakeFiles/RungeKuttaBenchmark.dir/build.make CMakeFiles/RungeKuttaBenchmark.dir/benchmarkers/Statistics.cpp.s
+.PHONY : benchmarkers/Statistics.cpp.s
 
 core/DataSet.o: core/DataSet.cpp.o
 .PHONY : core/DataSet.o
@@ -333,12 +429,24 @@ help:
 	@echo "... RungeKuttaBenchmark"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... Benchmarker.o"
-	@echo "... Benchmarker.i"
-	@echo "... Benchmarker.s"
 	@echo "... Main.o"
 	@echo "... Main.i"
 	@echo "... Main.s"
+	@echo "... benchmarkers/Benchmark.o"
+	@echo "... benchmarkers/Benchmark.i"
+	@echo "... benchmarkers/Benchmark.s"
+	@echo "... benchmarkers/Benchmarker.o"
+	@echo "... benchmarkers/Benchmarker.i"
+	@echo "... benchmarkers/Benchmarker.s"
+	@echo "... benchmarkers/CBenchmark.o"
+	@echo "... benchmarkers/CBenchmark.i"
+	@echo "... benchmarkers/CBenchmark.s"
+	@echo "... benchmarkers/CUDABenchmark.o"
+	@echo "... benchmarkers/CUDABenchmark.i"
+	@echo "... benchmarkers/CUDABenchmark.s"
+	@echo "... benchmarkers/Statistics.o"
+	@echo "... benchmarkers/Statistics.i"
+	@echo "... benchmarkers/Statistics.s"
 	@echo "... core/DataSet.o"
 	@echo "... core/DataSet.i"
 	@echo "... core/DataSet.s"

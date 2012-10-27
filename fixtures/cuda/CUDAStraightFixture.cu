@@ -4,6 +4,7 @@
 #include "cuda.h"
 #include "cuda_runtime.h"
 
+#include <rkb_types.h>
 #include <DataSet.h>
 #include <Fiber.h>
 #include <Fixture.h>

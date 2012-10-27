@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <cstdio>
 
+#include <rkb_types.h>
 #include <DataSet.h>
 #include <Fixture.h>
 #include <CStraightFixture.h>
