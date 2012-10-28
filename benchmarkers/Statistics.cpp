@@ -156,7 +156,7 @@ float *Statistics::getMemoStandardDeviations(){
   deviations = (float *) malloc(_times_count*sizeof(float));
 
   for(time_index = 0; time_index < _times_count; time_index++)
-    deviations[time_index] = calculateProcStandardDeviation(_times[time_index]);
+    deviations[time_index] = calculateMemoStandardDeviation(_times[time_index]);
 
   return deviations;
 }
@@ -165,6 +165,7 @@ float Statistics::calculateProcMean(timing *t){
   unsigned timing_index;
   float sum;
 
+  sum = 0.0;
   for(timing_index = 0; timing_index < _runs_count; timing_index++)
     sum += t[timing_index].proc;
 
@@ -175,6 +176,7 @@ float Statistics::calculateMemoMean(timing *t){
   unsigned timing_index;
   float sum;
 
+  sum = 0.0;
   for(timing_index = 0; timing_index < _runs_count; timing_index++)
     sum += t[timing_index].memo;
 
@@ -187,6 +189,7 @@ float Statistics::calculateProcStandardDeviation(timing *t){
 
   mean = calculateProcMean(t);
 
+  sum = 0.0;
   for(timing_index = 0; timing_index < _runs_count; timing_index++)
     sum += pow((t[timing_index].proc - mean), 2);
 
@@ -199,6 +202,7 @@ float Statistics::calculateMemoStandardDeviation(timing *t){
 
   mean = calculateMemoMean(t);
 
+  sum = 0.0;
   for(timing_index = 0; timing_index < _runs_count; timing_index++)
     sum += pow((t[timing_index].memo - mean), 2);
 
