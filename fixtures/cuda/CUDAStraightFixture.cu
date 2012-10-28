@@ -22,9 +22,11 @@ CUDAStraightFixture::CUDAStraightFixture(vector *v0, int v0_count, DataSet datas
     printf("\nCould not allocate %fMB for the initial points\n", (_v0_count*sizeof(vector))/1024.0/1024.0);
     exit(-1);
   }
-  if(cudaMalloc(&_field, dataset.n_x()*dataset.n_y()*dataset.n_z()*sizeof(vector)) == cudaErrorMemoryAllocation){
+  if(cudaHostRegister(dataset.field(), dataset.n_x()*dataset.n_y()*dataset.n_z()*sizeof(vector), cudaHostRegisterMapped) == cudaErrorMemoryAllocation){
     printf("\nCould not allocate %fMB for the vector field\n", (dataset.n_x()*dataset.n_y()*dataset.n_z()*sizeof(vector))/1024.0/1024.0);
     exit(-1);
+  }else{
+    cudaHostGetDevicePointer(&_field, dataset.field(), 0);
   }
   if(cudaMalloc(&_points_count, _v0_count*sizeof(int)) == cudaErrorMemoryAllocation){
     printf("\nCould not allocate %fMB for the points count vector\n", (_v0_count*sizeof(vector))/1024.0/1024.0);
@@ -49,7 +51,7 @@ CUDAStraightFixture::CUDAStraightFixture(vector *v0, int v0_count, DataSet datas
 }
 
 CUDAStraightFixture::~CUDAStraightFixture(){
-  cudaFree(_field);
+  cudaHostUnregister(_field);
   cudaFree(_v0);
   cudaFree(_points);
   cudaFree(_points_count);
