@@ -46,8 +46,8 @@ void Fiber::setPoint(unsigned order, vector point){
   _allocation_clock_count += (clock() - start);
 }
 
-double Fiber::getAllocationTime(){
-  return ( ( (double) _allocation_clock_count ) / ( (double) CLOCKS_PER_SEC ) );
+float Fiber::getAllocationTime(){
+  return ( ( (float) _allocation_clock_count ) / ( (float) CLOCKS_PER_SEC ) );
 }
 
 vector Fiber::getPoint(unsigned order){

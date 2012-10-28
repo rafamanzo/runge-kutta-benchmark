@@ -6,8 +6,8 @@ runge-kutta.sublime-workspace
 CMakeCache.txt
 CMakeFiles
 CPUresults.txt
-runge-kutta-benchmark.sublime-project
-runge-kutta-benchmark.sublime-workspace
+*.sublime-project
+*.sublime-workspace
 RungeKuttaBenchmark
 Makefile
 cmake_install.cmake

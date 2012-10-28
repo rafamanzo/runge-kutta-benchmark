@@ -30,7 +30,7 @@ vector subtract(vector v1, vector v2){
   return subtraction;
 }
 
-vector mult_scalar(vector v, double scalar){
+vector mult_scalar(vector v, float scalar){
   vector mult;
 
   mult.x = v.x*scalar;
@@ -46,11 +46,11 @@ void set(vector *x, vector y){
   (*x).z = y.z;
 }
 
-double module(vector v){
+float module(vector v){
   return sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2));
 }
 
-double distance(vector x, vector y){
+float distance(vector x, vector y){
   return module(sum(x, mult_scalar(y, -1.0)));
 }
 
@@ -83,7 +83,7 @@ vector nearest_neighbour(vector v0, int n_x, int n_y, int n_z, vector_field fiel
 
 vector trilinear_interpolation(vector v0, int n_x, int n_y, int n_z, vector_field field){
   int x1, y1, z1, x0, y0, z0;
-  double xd, yd, zd;
+  float xd, yd, zd;
 
   vector P1, P2, P3, P4, P5, P6, P7, P8, X1, X2, X3, X4, Y1, Y2, final;
 
@@ -159,7 +159,7 @@ void *rk2_kernel(void *args){
   return NULL;
 }
 
-void rk2_caller(vector *v0, int count_v0, double h, int n_x, int n_y, int n_z, vector_field field, Fiber ***fibers){
+void rk2_caller(vector *v0, int count_v0, float h, int n_x, int n_y, int n_z, vector_field field, Fiber ***fibers){
   int i;
   kernel_args *arguments;
   pthread_t *threads;
@@ -225,7 +225,7 @@ void *rk4_kernel(void *args){
   return NULL;
 }
 
-void rk4_caller(vector *v0, int count_v0, double h, int n_x, int n_y, int n_z, vector_field field, Fiber ***fibers){
+void rk4_caller(vector *v0, int count_v0, float h, int n_x, int n_y, int n_z, vector_field field, Fiber ***fibers){
   int i;
   clock_t start, finish;
   kernel_args *arguments;

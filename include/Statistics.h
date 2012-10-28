@@ -7,14 +7,14 @@ namespace RungeKuttaBenchmark{
       unsigned _times_count;
       unsigned _runs_count;
 
-      double *getProcMeans();
-      double *getMemoMeans();
-      double *getProcStandardDeviations();
-      double *getMemoStandardDeviations();
-      double calculateProcMean(timing *t);
-      double calculateMemoMean(timing *t);
-      double calculateProcStandardDeviation(timing *t);
-      double calculateMemoStandardDeviation(timing *t);
+      float *getProcMeans();
+      float *getMemoMeans();
+      float *getProcStandardDeviations();
+      float *getMemoStandardDeviations();
+      float calculateProcMean(timing *t);
+      float calculateMemoMean(timing *t);
+      float calculateProcStandardDeviation(timing *t);
+      float calculateMemoStandardDeviation(timing *t);
     public:
       Statistics();
       Statistics(unsigned runs_count);

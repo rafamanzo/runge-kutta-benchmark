@@ -41,7 +41,7 @@ __device__ vector cuda_subtract(vector v1, vector v2){
 }
 
 
-__device__ vector cuda_mult_scalar(vector v, double scalar){
+__device__ vector cuda_mult_scalar(vector v, float scalar){
   vector mult;
 
   mult.x = v.x*scalar;
@@ -57,11 +57,11 @@ __device__ void cuda_set(vector *x, vector y){
   (*x).z = y.z;
 }
 
-__device__ double cuda_module(vector v){
+__device__ float cuda_module(vector v){
   return sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2));
 }
 
-__device__ double cuda_distance(vector x, vector y){
+__device__ float cuda_distance(vector x, vector y){
   return cuda_module(cuda_sum(x, cuda_mult_scalar(y, -1.0)));
 }
 
@@ -99,7 +99,7 @@ __device__ vector cuda_nearest_neighbour(vector v0, int n_x, int n_y, int n_z, v
 
 __device__ vector cuda_trilinear_interpolation(vector v0, int n_x, int n_y, int n_z, vector_field field){
   int x1, y1, z1, x0, y0, z0;
-  double xd, yd, zd;
+  float xd, yd, zd;
 
   vector P1, P2, P3, P4, P5, P6, P7, P8, X1, X2, X3, X4, Y1, Y2, final;
 
@@ -143,7 +143,7 @@ __device__ vector cuda_trilinear_interpolation(vector v0, int n_x, int n_y, int 
 /* Kernels */
 /***********/
 
-__global__ void rk2_kernel(vector *v0, int count_v0, double h, int n_x, int n_y, int n_z, vector_field field, vector *points, int *n_points, int max_points){
+__global__ void rk2_kernel(vector *v0, int count_v0, float h, int n_x, int n_y, int n_z, vector_field field, vector *points, int *n_points, int max_points){
   vector k1, k2, initial, direction;
   int i, n_points_aux;
 
@@ -170,7 +170,7 @@ __global__ void rk2_kernel(vector *v0, int count_v0, double h, int n_x, int n_y,
   n_points_aux = 0;
 }
 
-__global__ void rk4_kernel(vector *v0, int count_v0, double h, int n_x, int n_y, int n_z, vector_field field, vector *points, int *n_points, int max_points){
+__global__ void rk4_kernel(vector *v0, int count_v0, float h, int n_x, int n_y, int n_z, vector_field field, vector *points, int *n_points, int max_points){
   vector k1, k2, k3, k4, initial, direction;
   int i, n_points_aux;
 
@@ -206,14 +206,14 @@ int blockThreadLimit(int count_v0){
   cudaDeviceProp deviceProp;
   cudaGetDeviceProperties(&deviceProp, 0);
 
-  return ceil(((double) count_v0)/((double) deviceProp.maxThreadsPerBlock));
+  return ceil(((float) count_v0)/((float) deviceProp.maxThreadsPerBlock));
 }
 
 int blockRegisterLimit(int count_v0){
   cudaDeviceProp deviceProp;
   cudaGetDeviceProperties(&deviceProp, 0);
 
-  return ceil(((double) count_v0*REGISTERS_PER_THREAD) / ((double) deviceProp.regsPerBlock) );
+  return ceil(((float) count_v0*REGISTERS_PER_THREAD) / ((float) deviceProp.regsPerBlock) );
 }
 
 int blocksCount(int count_v0){
@@ -233,10 +233,10 @@ int blocksCount(int count_v0){
 }
 
 int threadsPerBlock(int count_v0){
-  return floor( ((double) count_v0)/((double) blocksCount(count_v0)) );
+  return floor( ((float) count_v0)/((float) blocksCount(count_v0)) );
 }
 
-void rk2_cuda_caller(vector *v0, int count_v0, double h, int n_x, int n_y, int n_z, vector_field field, vector *points, int *points_count, int max_points){
+void rk2_cuda_caller(vector *v0, int count_v0, float h, int n_x, int n_y, int n_z, vector_field field, vector *points, int *points_count, int max_points){
   rk2_kernel<<<blocksCount(count_v0), threadsPerBlock(count_v0)>>>(v0, count_v0, h, n_x, n_y, n_z, field, points, points_count, max_points);
   if(cudaDeviceSynchronize() != cudaSuccess){
     printf("There was an error on RK2 execution: %s\n", cudaGetErrorString(cudaGetLastError()));
@@ -244,7 +244,7 @@ void rk2_cuda_caller(vector *v0, int count_v0, double h, int n_x, int n_y, int n
   }
 }
 
-void rk4_cuda_caller(vector *v0, int count_v0, double h, int n_x, int n_y, int n_z, vector_field field, vector *points, int *points_count, int max_points){
+void rk4_cuda_caller(vector *v0, int count_v0, float h, int n_x, int n_y, int n_z, vector_field field, vector *points, int *points_count, int max_points){
   rk4_kernel<<<blocksCount(count_v0), threadsPerBlock(count_v0)>>>(v0, count_v0, h, n_x, n_y, n_z, field, points, points_count, max_points);
   if(cudaDeviceSynchronize() != cudaSuccess){
     printf("There was an error on RK4 execution: %s\n", cudaGetErrorString(cudaGetLastError()));

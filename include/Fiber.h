@@ -11,6 +11,6 @@ namespace RungeKuttaBenchmark{
       void setPoint(unsigned order, vector point);
       vector getPoint(unsigned order);
       unsigned pointsCount();
-      double getAllocationTime();
+      float getAllocationTime();
   };
 }

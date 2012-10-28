@@ -8,11 +8,11 @@ namespace RungeKuttaBenchmark{
       DataSet getDataSet();
       vector *getInitialPoints();
       unsigned getInitialPointsCount();
-      double getStepSize();
+      float getStepSize();
     protected:
       DataSet _data_set;
       unsigned _v0_count;
       vector *_v0;
-      double _h;
+      float _h;
   };
 }

@@ -65,7 +65,7 @@ void Statistics::printHistograms(char *title){
 
 void Statistics::printMeans(char *title){
   unsigned time_index;
-  double *proc_means, *memo_means;
+  float *proc_means, *memo_means;
   FILE *proc_means_data, *memo_means_data;
   char file_name[257];
 
@@ -90,7 +90,7 @@ void Statistics::printMeans(char *title){
 
 void Statistics::printStandardDeviations(char *title){
   unsigned time_index;
-  double *proc_standard_deviations, *memo_standard_deviations;
+  float *proc_standard_deviations, *memo_standard_deviations;
   FILE *proc_standard_deviations_data, *memo_standard_deviations_data;
   char file_name[257];
 
@@ -113,11 +113,11 @@ void Statistics::printStandardDeviations(char *title){
   fclose(memo_standard_deviations_data);
 }
 
-double *Statistics::getProcMeans(){
-  double *means;
+float *Statistics::getProcMeans(){
+  float *means;
   unsigned time_index;
 
-  means = (double *) malloc(_times_count*sizeof(double));
+  means = (float *) malloc(_times_count*sizeof(float));
 
   for(time_index = 0; time_index < _times_count; time_index++)
     means[time_index] = calculateProcMean(_times[time_index]);
@@ -125,11 +125,11 @@ double *Statistics::getProcMeans(){
   return means;
 }
 
-double *Statistics::getMemoMeans(){
-  double *means;
+float *Statistics::getMemoMeans(){
+  float *means;
   unsigned time_index;
 
-  means = (double *) malloc(_times_count*sizeof(double));
+  means = (float *) malloc(_times_count*sizeof(float));
 
   for(time_index = 0; time_index < _times_count; time_index++)
     means[time_index] = calculateMemoMean(_times[time_index]);
@@ -137,11 +137,11 @@ double *Statistics::getMemoMeans(){
   return means;
 }
 
-double *Statistics::getProcStandardDeviations(){
-  double *deviations;
+float *Statistics::getProcStandardDeviations(){
+  float *deviations;
   unsigned time_index;
 
-  deviations = (double *) malloc(_times_count*sizeof(double));
+  deviations = (float *) malloc(_times_count*sizeof(float));
 
   for(time_index = 0; time_index < _times_count; time_index++)
     deviations[time_index] = calculateProcStandardDeviation(_times[time_index]);
@@ -149,11 +149,11 @@ double *Statistics::getProcStandardDeviations(){
   return deviations;
 }
 
-double *Statistics::getMemoStandardDeviations(){
-  double *deviations;
+float *Statistics::getMemoStandardDeviations(){
+  float *deviations;
   unsigned time_index;
 
-  deviations = (double *) malloc(_times_count*sizeof(double));
+  deviations = (float *) malloc(_times_count*sizeof(float));
 
   for(time_index = 0; time_index < _times_count; time_index++)
     deviations[time_index] = calculateProcStandardDeviation(_times[time_index]);
@@ -161,46 +161,46 @@ double *Statistics::getMemoStandardDeviations(){
   return deviations;
 }
 
-double Statistics::calculateProcMean(timing *t){
+float Statistics::calculateProcMean(timing *t){
   unsigned timing_index;
-  double sum;
+  float sum;
 
   for(timing_index = 0; timing_index < _runs_count; timing_index++)
     sum += t[timing_index].proc;
 
-  return sum/( (double) _runs_count);
+  return sum/( (float) _runs_count);
 }
 
-double Statistics::calculateMemoMean(timing *t){
+float Statistics::calculateMemoMean(timing *t){
   unsigned timing_index;
-  double sum;
+  float sum;
 
   for(timing_index = 0; timing_index < _runs_count; timing_index++)
     sum += t[timing_index].memo;
 
-  return sum/( (double) _runs_count);
+  return sum/( (float) _runs_count);
 }
 
-double Statistics::calculateProcStandardDeviation(timing *t){
+float Statistics::calculateProcStandardDeviation(timing *t){
   unsigned timing_index;
-  double mean, sum;
+  float mean, sum;
 
   mean = calculateProcMean(t);
 
   for(timing_index = 0; timing_index < _runs_count; timing_index++)
     sum += pow((t[timing_index].proc - mean), 2);
 
-  return sqrt(sum/( (double) _runs_count));
+  return sqrt(sum/( (float) _runs_count));
 }
 
-double Statistics::calculateMemoStandardDeviation(timing *t){
+float Statistics::calculateMemoStandardDeviation(timing *t){
   unsigned timing_index;
-  double mean, sum;
+  float mean, sum;
 
   mean = calculateMemoMean(t);
 
   for(timing_index = 0; timing_index < _runs_count; timing_index++)
     sum += pow((t[timing_index].memo - mean), 2);
 
-  return sqrt(sum/( (double) _runs_count));
+  return sqrt(sum/( (float) _runs_count));
 }

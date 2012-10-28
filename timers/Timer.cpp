@@ -9,11 +9,11 @@ Timer::Timer(){
   _memo_time_in_sec = 0.0;
 }
 
-double Timer::getProcTime(){
+float Timer::getProcTime(){
   return _proc_time_in_sec;
 }
 
-double Timer::getMemoTime(){
+float Timer::getMemoTime(){
   return _memo_time_in_sec;
 }
 

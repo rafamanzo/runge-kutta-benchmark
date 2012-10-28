@@ -6,12 +6,12 @@ namespace RungeKuttaBenchmark{
       virtual void stopRecordProcTime() = 0;
       virtual void startRecordMemoTime() = 0;
       virtual void stopRecordMemoTime() = 0;
-      double getProcTime();
-      double getMemoTime();
+      float getProcTime();
+      float getMemoTime();
       void resetProcTime();
       void resetMemoTime();
     protected:
-      double _proc_time_in_sec;
-      double _memo_time_in_sec;
+      float _proc_time_in_sec;
+      float _memo_time_in_sec;
   };
 }

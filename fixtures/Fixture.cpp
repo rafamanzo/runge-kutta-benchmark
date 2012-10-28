@@ -12,7 +12,7 @@ vector *Fixture::getInitialPoints(){
   return _v0;
 }
 
-double Fixture::getStepSize(){
+float Fixture::getStepSize(){
   return _h;
 }
 

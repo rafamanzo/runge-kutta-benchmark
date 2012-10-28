@@ -10,7 +10,7 @@ void CTimer::startRecordProcTime(){
 }
 
 void CTimer::stopRecordProcTime(){
-  _proc_time_in_sec += ( (clock() - _proc_start)/((double) CLOCKS_PER_SEC));
+  _proc_time_in_sec += ( (clock() - _proc_start)/((float) CLOCKS_PER_SEC));
 }
 
 void CTimer::startRecordMemoTime(){
@@ -18,5 +18,5 @@ void CTimer::startRecordMemoTime(){
 }
 
 void CTimer::stopRecordMemoTime(){
-  _memo_time_in_sec += ( (clock() - _memo_start)/((double) CLOCKS_PER_SEC));
+  _memo_time_in_sec += ( (clock() - _memo_start)/((float) CLOCKS_PER_SEC));
 }

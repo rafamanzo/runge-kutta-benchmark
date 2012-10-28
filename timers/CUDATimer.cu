@@ -32,7 +32,7 @@ void CUDATimer::stopRecordProcTime(){
 
   cudaEventElapsedTime(&time, _proc_start, _proc_finish);
 
-  _proc_time_in_sec += (double) (time/1000.0);
+  _proc_time_in_sec += (float) (time/1000.0);
 }
 
 void CUDATimer::startRecordMemoTime(){
@@ -47,5 +47,5 @@ void CUDATimer::stopRecordMemoTime(){
 
   cudaEventElapsedTime(&time, _memo_start, _memo_finish);
 
-  _memo_time_in_sec += (double) (time/1000.0);
+  _memo_time_in_sec += (float) (time/1000.0);
 }
